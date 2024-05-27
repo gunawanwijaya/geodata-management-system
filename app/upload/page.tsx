@@ -15,13 +15,13 @@ export default function UploadPage(): ReactElement {
 
   useEffect(() => {
     if (!cookies.accessToken || cookies.accessToken === "") { // eslint-disable-line @typescript-eslint/strict-boolean-expressions
-      const href = `/signin?redir=/upload&message=${btoa("Please login to provide accessToken for upload").replaceAll("+", "-").replaceAll("/", "_")}`;
+      const href = `/signin?redir=/upload&message=${btoa("Please signin to provide accessToken for upload").replaceAll("+", "-").replaceAll("/", "_")}`;
       router.push(href);
     };
   }, []);
 
   function onChange(e: ChangeEvent<HTMLInputElement>): void {
-    const files = [...(e.target.files ?? [])];
+    const files: File[] = []; for (const f of e.target.files ?? []) { files.push(f) }
     (async (): Promise<void> => {
       let numOfFeatures = 0;
       let numOfFiles = 0;
