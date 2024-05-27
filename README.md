@@ -1,36 +1,29 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# geodata management system
+technical test for geospatial company.
 
-## Getting Started
+## PRD
+According to prd.pdf, the goals is to create a GeoData Management System using Next.js.
 
-First, run the development server:
+### Action plan
+- [x] (Client-Side) Data Upload Component
+- [ ] (Client-Side) Data Processing Visualization
+- [ ] (Client-Side) Unit Testing with Jest
+- [ ] (Client-Side) Deployment and CI/CD Pipeline
+- [x] (Server-Side) Seeding and Migration
+- [x] (Server-Side) Implement Data Reader Endpoint
+- [x] (Server-Side) Authentication and Authorization
+- [x] (Server-Side) User Input Validation
+- [x] (Server-Side) Development of Data Processing Endpoint
+- [ ] (Server-Side) Unit Testing with Jest
+- [ ] (Server-Side) Design and Implementation of API Documentation
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Timeline
+1. (2 hrs) learning basic NextJS & successfully init new project using create next app
+1. (2 hrs) creating basic form for file upload, signin & register using tailwind + registering eventhandler
+1. (2 hrs) creating db schema using prisma with sqlite + connecting the ORM with api to sync with database
+1. (2 hrs) learning geojson library, ended up using [openlayers](https://openlayers.org/)
+1. (2 hrs) creating validation on client & server on geojson file upload + file handling to save the resource & id to the table
+1. (2 hrs) learning how to load geojson in react after rendering (most likely skill issues)
+1. (2 hrs) improving UX when user is onboarding, integration with zxcvbn to reject weak/compromised password
+1. (4 hrs) creating custom security feature (csrf & access token)
+1. (4 hrs) attempting to fix build issues but to no avail, so only able to run using `npm run dev`
