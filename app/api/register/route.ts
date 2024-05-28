@@ -8,7 +8,7 @@ import { encryptAesGcm, decryptAesGcm, getKeyAesGcm } from "./../../components/s
 import { cookies } from 'next/headers'
 
 interface Standard {
-  errors?: string[]
+  errors?: unknown[]
   data?: object
 }
 

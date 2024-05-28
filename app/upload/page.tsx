@@ -1,24 +1,24 @@
 'use client';
 import { GeoJSON } from "ol/format";
 import type { ChangeEvent, FormEvent, ReactElement } from "react";
-import { useState, useEffect } from "react";
-import { useCookies } from "react-cookie";
-import { useRouter } from 'next/navigation';
+import { useState } from "react";
+// import { useCookies } from "react-cookie";
+// import { useRouter } from 'next/navigation';
 
 export default function UploadPage(): ReactElement {
 
   const [message, setMessage] = useState("Click to upload your GeoJSON files");
   const [inactive, setInactive] = useState(true);
-  const [cookies,] = useCookies(["accessToken"]);
-  const router = useRouter();
+  // const [cookies,] = useCookies(["accessToken"]);
+  // const router = useRouter();
   const maxSize = 1 << 20; // default to 1<<20 or 1MiB
 
-  useEffect(() => {
-    if (!cookies.accessToken || cookies.accessToken === "") { // eslint-disable-line @typescript-eslint/strict-boolean-expressions
-      const href = `/signin?redir=/upload&message=${btoa("Please signin to provide accessToken for upload").replaceAll("+", "-").replaceAll("/", "_")}`;
-      router.push(href);
-    };
-  }, []);
+  // useEffect(() => {
+  //   if (!cookies.accessToken || cookies.accessToken === "") { // eslint-disable-line @typescript-eslint/strict-boolean-expressions
+  //     const href = `/signin?redir=/upload&message=${btoa("Please signin to provide accessToken for upload").replaceAll("+", "-").replaceAll("/", "_")}`;
+  //     router.push(href);
+  //   };
+  // }, []);
 
   function onChange(e: ChangeEvent<HTMLInputElement>): void {
     const files: File[] = []; for (const f of e.target.files ?? []) { files.push(f) }
@@ -59,14 +59,15 @@ export default function UploadPage(): ReactElement {
     e.stopPropagation();
     const body = new FormData(e.currentTarget);
     (async (): Promise<void> => {
-      // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-      if (!cookies.accessToken || cookies.accessToken === "") {
-        const href = `/signin?redir=/upload&message=${btoa("Please login to provide accessToken for upload").replaceAll("+", "-").replaceAll("/", "_")}`;
-        router.push(href);
-        return;
-      };
-      const headers = { authorization: `Bearer ${cookies.accessToken}` };
-      await fetch("/api/upload", { method: "POST", body, headers }).then(async r => r.json()).then(console.debug, console.error);
+      // let authorization: string | undefined = undefined;
+      // // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
+      // if (!cookies.accessToken || cookies.accessToken === "") {
+      //   const href = `/signin?redir=/upload&message=${btoa("Please signin to provide accessToken for upload").replaceAll("+", "-").replaceAll("/", "_")}`;
+      //   router.push(href);
+      //   return;
+      // } else { authorization = `Bearer ${cookies.accessToken}` };
+      // headers: { authorization }
+      await fetch("/api/upload", { method: "POST", body }).then(async r => r.json()).then(console.debug, console.error);
     })().then(console.debug, console.error);
   }
 
