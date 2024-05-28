@@ -3,14 +3,14 @@ import { GeoJSON } from "ol/format";
 import type { ChangeEvent, FormEvent, ReactElement } from "react";
 import { useState } from "react";
 // import { useCookies } from "react-cookie";
-// import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 export default function UploadPage(): ReactElement {
 
   const [message, setMessage] = useState("Click to upload your GeoJSON files");
   const [inactive, setInactive] = useState(true);
   // const [cookies,] = useCookies(["accessToken"]);
-  // const router = useRouter();
+  const router = useRouter();
   const maxSize = 1 << 20; // default to 1<<20 or 1MiB
 
   // useEffect(() => {
@@ -67,7 +67,18 @@ export default function UploadPage(): ReactElement {
       //   return;
       // } else { authorization = `Bearer ${cookies.accessToken}` };
       // headers: { authorization }
-      await fetch("/api/upload", { method: "POST", body }).then(async r => r.json()).then(console.debug, console.error);
+      interface UploadResponse {
+        data?: {
+          upload?: {
+            message?: string;
+            persist?: { id: string; geojson: object }[]
+          }
+        }
+      }
+      const res = await fetch("/api/upload", { method: "POST", body }).then(async r => r.json()) as UploadResponse;
+      if (typeof res.data?.upload?.persist !== "undefined" && res.data.upload.persist.length > 0) {
+        router.push(`/geojson/${res.data.upload.persist[0].id}`)
+      }
     })().then(console.debug, console.error);
   }
 
@@ -81,7 +92,7 @@ export default function UploadPage(): ReactElement {
             </svg>
             <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">{message}</p>
           </div>
-          <input id="files" name="files" type="file" className="hidden" accept="*" multiple={true} onChange={onChange} /> {""}
+          <input id="files" name="files" type="file" className="hidden" accept="*" multiple={false} onChange={onChange} /> {""}
         </label>
         <button hidden={inactive} disabled={inactive} type="submit" className="mb-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
           Upload

@@ -6,7 +6,7 @@ According to prd.pdf, the goals is to create a GeoData Management System using N
 
 ### Action plan
 - [x] (Client-Side) Data Upload Component
-- [ ] (Client-Side) Data Processing Visualization
+- [x] (Client-Side) Data Processing Visualization
 - [ ] (Client-Side) Unit Testing with Jest
 - [ ] (Client-Side) Deployment and CI/CD Pipeline
 - [x] (Server-Side) Seeding and Migration
@@ -27,3 +27,4 @@ According to prd.pdf, the goals is to create a GeoData Management System using N
 1. (2 hrs) improving UX when user is onboarding, integration with zxcvbn to reject weak/compromised password
 1. (4 hrs) creating custom security feature (csrf & access token)
 1. (4 hrs) attempting to fix build issues but to no avail, so only able to run using `npm run dev`
+1. (4 hrs) turns out the issue is on improper config of `next.config.mjs`, fixed on [this commit](https://github.com/gunawanwijaya/geodata-management-system/commit/ee1eea33198be92749a8fbfd685f376cea1d8bfd#diff-18c049b08c4a0f5ab451c598aeb2c4848bb9d7877b51ca3e5effb94a225814d2)

@@ -20,8 +20,8 @@ interface AccessToken {
 }
 
 export async function POST(req: NextRequest): Promise<NextResponse<Standard>> {
-  let encAccessToken = req.headers.get("authorization")?.replace("Bearer ", "") ?? cookies().get("accessToken")?.value;
-  if (!encAccessToken) return NextResponse.json(
+  const encAccessToken = req.headers.get("authorization")?.replace("Bearer ", "") ?? cookies().get("accessToken")?.value;
+  if (typeof encAccessToken === "undefined" || encAccessToken.length < 1) return NextResponse.json(
     { errors: [Error("invalid accessToken found in cookies")] } as Standard,
     { status: 400 } as ResponseInit
   );
