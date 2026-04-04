@@ -15,7 +15,7 @@
     "@zxcvbn-ts/language-en": "^3.0.2",
     "argon2": "^0.40.3",
     "next": "16.2.2",
-    "next-auth": "^4.24.10",
+    "next-auth": "^4.24.12",
     "ol": "^9.2.3",
     "react": "^18",
     "react-cookie": "^7.1.4",
